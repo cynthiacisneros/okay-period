@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Essentials — Okay, Period!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="products-page">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <nav class="site-nav" id="site-nav" aria-label="Site pages">
+    <div class="site-nav__inner">
+      <a href="index.html" class="site-logo">Okay, Period!</a>
+      <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="Open menu">
+        <span class="site-nav__toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="site-nav__toggle-text" aria-hidden="true">Menu</span>
+      </button>
+      <ul id="site-nav-menu" class="site-nav__list">
+        <li><a href="whatisaperiod.html" class="site-nav__link">What Is a Period?</a></li>
+        <li><a href="tips.html" class="site-nav__link">Tips</a></li>
+        <li><a href="essentials.html" class="site-nav__link" aria-current="page">Essentials</a></li>
+        <li><a href="resources.html" class="site-nav__link">Resources</a></li>
+        <li><a href="realtalk.html" class="site-nav__link">Real Talk</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="page-wrap page-wrap--products">
+    <main id="main-content" class="products-main" tabindex="-1">
+      <header class="products-intro">
+        <h1 class="products-intro__title">Essentials</h1>
+        <p class="products-intro__lede">
+          There is not one “right” product for everyone. What feels best can change with your flow,
+          your day, and what your body likes. This page is here so you can explore options slowly,
+          compare a few ideas, and choose what fits.
+        </p>
+        <p class="products-intro__lede">
+          You don’t have to get this perfect. These are just options to help you figure out what feels right for you.
+        </p>
+      </header>
+
+      <section class="products-filters" aria-label="Filter products">
+        <div class="products-filters__row">
+          <p class="products-filters__label" id="filter-category-label">Category</p>
+          <div class="products-filters__chips" role="group" aria-labelledby="filter-category-label">
+            <button type="button" class="products-chip" data-filter-cat="all" aria-pressed="true">All</button>
+            <button type="button" class="products-chip" data-filter-cat="Pads" aria-pressed="false">Pads</button>
+            <button type="button" class="products-chip" data-filter-cat="Tampons" aria-pressed="false">Tampons</button>
+            <button type="button" class="products-chip" data-filter-cat="Period Underwear" aria-pressed="false">Period Underwear</button>
+          </div>
+        </div>
+        <div class="products-filters__row">
+          <div class="products-filters__row-head">
+            <p class="products-filters__label" id="filter-tag-label">Tags</p>
+            <button type="button" class="products-filters__clear" id="products-clear-tags" hidden>Clear tags</button>
+          </div>
+          <p class="products-filters__hint" id="filter-tag-hint">Optional: choose one or more. Products that match any selected tag will show. If you’re just starting, pads are usually the easiest place to begin. Tampons can take a little getting used to—and that’s completely okay. Some people prefer something that feels more like regular underwear.</p>
+          <div class="products-filters__chips" role="group" aria-labelledby="filter-tag-label" aria-describedby="filter-tag-hint">
+            <button type="button" class="products-chip products-chip--tag" data-filter-tag="Beginner Friendly" aria-pressed="false">Beginner Friendly</button>
+            <button type="button" class="products-chip products-chip--tag" data-filter-tag="Budget" aria-pressed="false">Budget</button>
+            <button type="button" class="products-chip products-chip--tag" data-filter-tag="Organic Cotton" aria-pressed="false">Organic Cotton</button>
+            <button type="button" class="products-chip products-chip--tag" data-filter-tag="Overnight" aria-pressed="false">Overnight</button>
+            <button type="button" class="products-chip products-chip--tag" data-filter-tag="Reusable" aria-pressed="false">Reusable</button>
+          </div>
+        </div>
+      </section>
+
+      <div
+        id="product-grid"
+        class="products-grid"
+        role="list"
+        aria-busy="true"
+      ></div>
+      <p id="products-empty" class="products-empty" hidden>No products match these filters. Try clearing a tag or choosing a different category.</p>
+
+      <section class="products-reassure" aria-labelledby="products-reassure-heading">
+        <h2 id="products-reassure-heading" class="products-reassure__title">Not sure what to choose?</h2>
+        <p class="products-reassure__text">
+          That’s okay. Most people try a few different things before finding what works for them. You don’t have to figure it all out right away.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Okay, period - is for educational purposes. Not medical advice.</p>
+    </footer>
+  </div>
+  <script src="nav.js" defer></script>
+  <script src="products.js" defer></script>
+</body>
+</html>
+
