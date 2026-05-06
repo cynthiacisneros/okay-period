@@ -121,47 +121,89 @@
       <section class="cycle-tracker-section resources-section" aria-labelledby="cycle-tracker-heading">
         <div class="cycle-tracker-text">
           <h2 id="cycle-tracker-heading">Track Your Cycle ✨</h2>
-          <p>You don’t need an app to understand your body.</p>
-          <p>A simple calendar can help you notice patterns, like when your period starts, how long it lasts, and how you feel from day to day.</p>
-          <p>Over time, this can help you feel more prepared and a little less surprised.</p>
-          <p class="cycle-note">💡 Most cycles happen about every 21–35 days. Yours may not feel regular at first, and that is completely okay.</p>
+          <p>Tracking your cycle can help you understand your body a little better over time.</p>
+          <p>
+            It can help you notice patterns like when your period starts, how long it lasts, symptoms you experience,
+            and changes in mood, energy, or cramps throughout the month.
+          </p>
+          <p>
+            You can keep track using a simple calendar, a notes app, or a cycle tracking app — whatever feels easiest
+            for you.
+          </p>
+          <p class="cycle-note">
+            💡 Most cycles happen about every 21–35 days, but everyone’s body is different. Irregular cycles can happen,
+            especially during stress, lifestyle changes, or when you’re still learning your body’s rhythm.
+          </p>
         </div>
 
-        <div class="cycle-calendar-card">
-          <h3>Example Period Tracker</h3>
-          <p class="calendar-subtext">Tap the days to mark your flow.</p>
+        <div class="cycle-tracker-sidebar">
+          <div class="cycle-calendar-card">
+            <h3>Example Period Tracker</h3>
+            <p class="calendar-subtext">Tap the days to mark your flow.</p>
 
-          <div class="calendar-month">May 2026</div>
+            <div class="calendar-month">May 2026</div>
 
-          <div class="calendar-weekdays">
-            <span>Sun</span>
-            <span>Mon</span>
-            <span>Tue</span>
-            <span>Wed</span>
-            <span>Thu</span>
-            <span>Fri</span>
-            <span>Sat</span>
+            <div class="calendar-weekdays">
+              <span>Sun</span>
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+            </div>
+
+            <div class="calendar-grid" id="periodCalendar"></div>
+
+            <div class="calendar-legend">
+              <span>🌸 Light</span>
+              <span>❤️ Medium</span>
+              <span>🌙 Heavy</span>
+            </div>
+
+            <p class="calendar-summary" id="calendarSummary">
+              Tap a few days to see an example pattern.
+            </p>
+
+            <p class="calendar-reassurance">
+              Everyone’s cycle is a little different, and that’s okay.
+            </p>
+
+            <button class="calendar-reset-btn" id="calendarResetBtn" type="button">
+              Clear calendar
+            </button>
           </div>
 
-          <div class="calendar-grid" id="periodCalendar"></div>
-
-          <div class="calendar-legend">
-            <span>🌸 Light</span>
-            <span>❤️ Medium</span>
-            <span>🌙 Heavy</span>
+          <div class="cycle-apps" aria-labelledby="cycle-apps-heading">
+            <h3 id="cycle-apps-heading" class="cycle-apps__title">Recommended Cycle Tracking Apps</h3>
+            <ul class="cycle-apps__list" role="list">
+              <li>
+                <a class="cycle-app-card" href="https://helloclue.com/" target="_blank" rel="noopener noreferrer">Clue</a>
+              </li>
+              <li>
+                <a class="cycle-app-card" href="https://flo.health/" target="_blank" rel="noopener noreferrer">Flo</a>
+              </li>
+              <li>
+                <a class="cycle-app-card" href="https://stardust.app/" target="_blank" rel="noopener noreferrer">Stardust</a>
+              </li>
+              <li>
+                <a
+                  class="cycle-app-card"
+                  href="https://support.apple.com/guide/iphone/track-your-menstrual-cycle-iphb97eaf495/ios"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Apple Health Cycle Tracking</a>
+              </li>
+              <li>
+                <a
+                  class="cycle-app-card"
+                  href="https://period-calendar.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Period Calendar Period Tracker</a>
+              </li>
+            </ul>
           </div>
-
-          <p class="calendar-summary" id="calendarSummary">
-            Tap a few days to see an example pattern.
-          </p>
-
-          <p class="calendar-reassurance">
-            Everyone’s cycle is a little different, and that’s okay.
-          </p>
-
-          <button class="calendar-reset-btn" id="calendarResetBtn" type="button">
-            Clear calendar
-          </button>
         </div>
       </section>
     </main>
