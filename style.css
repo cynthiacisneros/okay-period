@@ -3545,6 +3545,65 @@ body.products-page .site-nav {
   background: color-mix(in srgb, var(--essentials-cream) 94%, #ffffff) !important;
 }
 
+/* Essentials — centered logo with links below (desktop); compact header on small screens */
+@media (min-width: 769px) {
+  body.products-page .site-nav__inner {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem 0;
+    padding-block: 0.85rem 1rem;
+  }
+
+  body.products-page .site-nav__inner > .site-logo {
+    margin-right: 0;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  body.products-page .site-nav__list {
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 52rem;
+    row-gap: 0.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body.products-page .site-nav__inner {
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+    padding-inline: clamp(2.85rem, 10vw, 3.75rem) 1.35rem;
+  }
+
+  body.products-page .site-nav__inner > .site-logo {
+    margin-right: 0;
+    margin-inline: auto;
+    align-self: center;
+    text-align: center;
+    max-width: calc(100% - 3.25rem);
+  }
+
+  body.products-page .site-nav__toggle {
+    position: absolute;
+    top: 0.55rem;
+    right: 1rem;
+    margin-left: 0;
+  }
+
+  body.products-page .site-nav__list {
+    align-items: center;
+  }
+
+  body.products-page .site-nav__link {
+    text-align: center;
+  }
+}
+
 body.products-page .site-logo {
   font-family: var(--font-essentials-display);
   font-size: clamp(1.15rem, 2.5vw, 1.35rem);
