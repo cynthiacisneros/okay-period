@@ -220,18 +220,16 @@
       var bucket = groups[cat];
       if (!bucket || bucket.length === 0) return;
 
-      var sectionEl = document.createElement("section");
-      sectionEl.className = "product-category";
-      var headingId = categorySectionId(cat);
-      sectionEl.setAttribute("aria-labelledby", headingId);
-
       var heading = document.createElement("h2");
+      heading.className = "products-categories__title";
+      var headingId = categorySectionId(cat);
       heading.id = headingId;
       heading.textContent = categorySectionHeading(cat);
 
       var list = document.createElement("div");
       list.className = "products-grid";
       list.setAttribute("role", "list");
+      list.setAttribute("aria-labelledby", headingId);
 
       bucket.forEach(function (entry) {
         var p = entry.product;
@@ -307,9 +305,8 @@
         list.appendChild(article);
       });
 
-      sectionEl.appendChild(heading);
-      sectionEl.appendChild(list);
-      gridEl.appendChild(sectionEl);
+      gridEl.appendChild(heading);
+      gridEl.appendChild(list);
     });
 
     if (emptyEl) {

@@ -3078,8 +3078,15 @@ body.products-page main.products-main {
   border-radius: 0;
 }
 
-body.products-page .product-category {
-  margin-bottom: 80px;
+/* Category headings above each recommendation grid (Essentials #product-grid; JS-inserted h2s only) */
+body.products-page #product-grid > h2.products-categories__title {
+  margin-top: 1.5rem; /* ~24px */
+  margin-bottom: 0.75rem; /* ~12px */
+  text-align: left;
+}
+
+body.products-page #product-grid > h2.products-categories__title:first-child {
+  margin-top: 0;
 }
 
 .products-intro {
