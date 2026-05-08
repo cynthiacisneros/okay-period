@@ -12,6 +12,21 @@
     "Period Underwear": "images/products/period-underwear.svg",
   };
 
+  /** Display order and section titles (match Essentials layout reference). */
+  var CATEGORY_ORDER = ["Pads", "Tampons", "Period Underwear"];
+
+  function categorySectionTitle(category) {
+    if (category === "Pads") return "Menstrual Pads";
+    return category;
+  }
+
+  function categoryMetaUpper(category) {
+    if (category === "Pads") return "PADS";
+    if (category === "Tampons") return "TAMPONS";
+    if (category === "Period Underwear") return "PERIOD UNDERWEAR";
+    return String(category).toUpperCase();
+  }
+
   var PRODUCTS = [
     {
       name: "B-Pure Pads",
@@ -174,11 +189,16 @@
     return CATEGORY_IMAGES[product.category] || "images/products/pads.svg";
   }
 
-  function tierLabel(tier) {
-    if (tier === "Affordable") return "Budget-friendly";
-    if (tier === "Mid-range") return "Mid-range";
-    if (tier === "Higher-end") return "Premium";
-    return tier;
+  /** Uppercase line under card title (e.g. PADS · BUDGET-FRIENDLY). */
+  function tierMetaUpper(tier) {
+    if (tier === "Affordable") return "BUDGET-FRIENDLY";
+    if (tier === "Mid-range") return "MID-RANGE";
+    if (tier === "Higher-end") return "PREMIUM";
+    return String(tier).toUpperCase();
+  }
+
+  function productMetaLine(product) {
+    return categoryMetaUpper(product.category) + " · " + tierMetaUpper(product.priceTier);
   }
 
   function productMatches(p) {
@@ -195,78 +215,108 @@
     gridEl.innerHTML = "";
     var visible = 0;
 
+    var groups = {};
     PRODUCTS.forEach(function (p, index) {
-      var match = productMatches(p);
-      if (!match) return;
-      visible++;
+      if (!productMatches(p)) return;
+      if (!groups[p.category]) groups[p.category] = [];
+      groups[p.category].push({ product: p, index: index });
+    });
 
-      var article = document.createElement("article");
-      article.className = "product-card";
-      article.setAttribute("role", "listitem");
-      article.setAttribute("data-category", p.category);
-      article.setAttribute("data-index", String(index));
+    CATEGORY_ORDER.forEach(function (cat) {
+      var bucket = groups[cat];
+      if (!bucket || bucket.length === 0) return;
 
-      var media = document.createElement("div");
-      media.className = "product-card__media product-image";
+      var sectionId = "products-section-" + cat.replace(/\s+/g, "-").toLowerCase();
+      var section = document.createElement("section");
+      section.className = "products-grid-section";
+      section.setAttribute("aria-labelledby", sectionId);
 
-      var img = document.createElement("img");
-      img.className = "product-card__img";
-      img.src = imageSrcFor(p);
-      img.alt = p.alt || p.name;
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.addEventListener("error", function onImgErr() {
-        img.removeEventListener("error", onImgErr);
-        img.src = CATEGORY_IMAGES[p.category] || "images/products/pads.svg";
+      var heading = document.createElement("h2");
+      heading.className = "products-grid-section__title";
+      heading.id = sectionId;
+      heading.textContent = categorySectionTitle(cat);
+
+      var list = document.createElement("div");
+      list.className = "products-grid";
+      list.setAttribute("role", "list");
+
+      bucket.forEach(function (entry) {
+        var p = entry.product;
+        var index = entry.index;
+        visible++;
+
+        var article = document.createElement("article");
+        article.className = "product-card";
+        article.setAttribute("role", "listitem");
+        article.setAttribute("data-category", p.category);
+        article.setAttribute("data-index", String(index));
+
+        var media = document.createElement("div");
+        media.className = "product-card__media product-image";
+
+        var img = document.createElement("img");
+        img.className = "product-card__img";
+        img.src = imageSrcFor(p);
+        img.alt = p.alt || p.name;
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.addEventListener("error", function onImgErr() {
+          img.removeEventListener("error", onImgErr);
+          img.src = CATEGORY_IMAGES[p.category] || "images/products/pads.svg";
+        });
+
+        media.appendChild(img);
+
+        var body = document.createElement("div");
+        body.className = "product-card__body";
+
+        var titleEl = document.createElement("h3");
+        titleEl.className = "product-card__title";
+        titleEl.textContent = p.name;
+
+        var meta = document.createElement("p");
+        meta.className = "product-card__meta";
+        meta.textContent = productMetaLine(p);
+
+        var desc = document.createElement("p");
+        desc.className = "product-card__desc";
+        desc.textContent = p.description;
+
+        var tagsWrap = document.createElement("ul");
+        tagsWrap.className = "product-card__tags";
+        tagsWrap.setAttribute("aria-label", "Tags");
+
+        p.tags.forEach(function (tag) {
+          var li = document.createElement("li");
+          var span = document.createElement("span");
+          span.className = "product-card__tag";
+          span.textContent = tag;
+          li.appendChild(span);
+          tagsWrap.appendChild(li);
+        });
+
+        var btn = document.createElement("a");
+        btn.className = "product-card__btn";
+        btn.href = p.link;
+        btn.rel = "noopener noreferrer";
+        btn.target = "_blank";
+        btn.textContent = "Learn More";
+        btn.setAttribute("aria-label", "Learn more about " + p.name + " (opens in new tab)");
+
+        body.appendChild(titleEl);
+        body.appendChild(meta);
+        body.appendChild(desc);
+        body.appendChild(tagsWrap);
+        body.appendChild(btn);
+
+        article.appendChild(media);
+        article.appendChild(body);
+        list.appendChild(article);
       });
 
-      media.appendChild(img);
-
-      var body = document.createElement("div");
-      body.className = "product-card__body";
-
-      var h2 = document.createElement("h3");
-      h2.className = "product-card__title";
-      h2.textContent = p.name;
-
-      var meta = document.createElement("p");
-      meta.className = "product-card__meta";
-      meta.textContent = p.category + " · " + tierLabel(p.priceTier);
-
-      var desc = document.createElement("p");
-      desc.className = "product-card__desc";
-      desc.textContent = p.description;
-
-      var tagsWrap = document.createElement("ul");
-      tagsWrap.className = "product-card__tags";
-      tagsWrap.setAttribute("aria-label", "Tags");
-
-      p.tags.forEach(function (tag) {
-        var li = document.createElement("li");
-        var span = document.createElement("span");
-        span.className = "product-card__tag";
-        span.textContent = tag;
-        li.appendChild(span);
-        tagsWrap.appendChild(li);
-      });
-
-      var btn = document.createElement("a");
-      btn.className = "product-card__btn";
-      btn.href = p.link;
-      btn.rel = "noopener noreferrer";
-      btn.target = "_blank";
-      btn.textContent = "Learn More";
-      btn.setAttribute("aria-label", "Learn more about " + p.name + " (opens in new tab)");
-
-      body.appendChild(h2);
-      body.appendChild(meta);
-      body.appendChild(desc);
-      body.appendChild(tagsWrap);
-      body.appendChild(btn);
-
-      article.appendChild(media);
-      article.appendChild(body);
-      gridEl.appendChild(article);
+      section.appendChild(heading);
+      section.appendChild(list);
+      gridEl.appendChild(section);
     });
 
     if (emptyEl) {
